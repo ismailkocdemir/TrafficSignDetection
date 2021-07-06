@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(OpenCV_STATIC ON)
 set(OpenCV_CUDA OFF)
 
-#set(OpenCV_DIR "/home/ismail/.local/lib/cmake/opencv4")
 find_package( OpenCV REQUIRED )
 
 include_directories( ${OpenCV_INCLUDE_DIRS} )

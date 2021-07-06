@@ -1,0 +1,3 @@
+not creating augmented samples when no sign filter is given
+GENERATING: vec_ALLSIGNS_real
+===================================================

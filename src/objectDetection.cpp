@@ -4,96 +4,126 @@
 #include "opencv2/videoio.hpp"
 #include "opencv2/core/utils/filesystem.hpp"
 #include <iostream>
+#include <iterator>
+#include <map>
 
 using namespace std;
 using namespace cv;
 
 /** Function Headers */
-void detectAndDisplay( Mat frame, int idx );
+void detectAndDisplay( Mat frame, int idx, bool show);
 
 /** Global variables */
-CascadeClassifier haar_cascade;
+map<string, CascadeClassifier> haar_cascades;
 
 /** @function main */
 int main( int argc, const char** argv )
 {
     CommandLineParser parser(argc, argv,
-                             "{help h | |}"
-                             "{haar_cascade | /home/ismail/ford/code/detection/data/cascades_default/cascade.xml | Path to cascade.}"
-                             "{test_dir | /home/ismail/ford/code/detection/data/img | Test image directory}");
+                             "{help h       |                            |                                 }"
+                             "{show s       |                            |                                 }"
+                             "{cascade_dir  | ../data/cascades/real      | Path to cascade.                }"
+                             "{test_dir     | ../data/dataset/img_test   | Test image directory            }");
 
     parser.about( "\nThis program demonstrates using the cv::CascadeClassifier class to detect traffic signs from images.\n"
-                  "It uses HAAR-Cascades to detect existence of any sign. Then, it classifies the found signs with HOG + SVM.\n\n" );
+                  "It uses HAAR-Cascades to detect existence of any sign..\n\n" );
     
-    //parser.printMessage();
+    parser.printMessage();
 
-    String haar_cascade_name = parser.get<String>("haar_cascade");
+    String cascade_dir = parser.get<String>("cascade_dir");
     String test_dir = parser.get<String>("test_dir");
+    bool show = parser.has("show");
 
-    if( !cv::utils::fs::isDirectory(test_dir) )
+    if( !utils::fs::isDirectory(test_dir) )
     {
-        cout << "Error: invalid test directory\n";
+        cerr << "Error: invalid test directory\n";
         return -1;
     }
 
-    //-- 1. Load the cascades
-    if( !haar_cascade.load( haar_cascade_name ) )
+    if( !utils::fs::isDirectory(cascade_dir) )
     {
-        cout << "Error loading cascade\n";
+        cerr << "Error: invalid test directory\n";
         return -1;
-    };
+    }
 
-    std::vector<cv::String> filenames;
-    String full_pattern = cv::utils::fs::join(test_dir, "*.jpg");
-    glob(full_pattern, filenames, false);    
+    // Load all cascades from the directory
+    vector<String> sign_dirs;
+    utils::fs::glob(cascade_dir, "*", sign_dirs, false, true);
+    if(sign_dirs.size() == 0)
+    {
+        cerr << "Could not find any cascade in the given directory: " << cascade_dir << endl;
+        return -1;
+    }
+
+    for(const auto & path: sign_dirs)
+    {
+        string sign_name = path.substr(path.find_last_of('/') + 1, path.length());
+        CascadeClassifier haar_cascade;       
+        
+        if(!haar_cascade.load(utils::fs::join(path, "cascade.xml")))
+        {
+            cerr << "Error loading cascade in: " << path << endl;
+            continue;
+        }
+        cout << "loaded cascade for sign: " << sign_name << endl;
+        haar_cascades.insert(pair<string, CascadeClassifier>(sign_name, haar_cascade));
+    }
+
+    // Loop trough test images and run the classifiers.
+    vector<String> images;
+    utils::fs::glob(test_dir, "*.jpg", images);    
     int idx = 0;
-    for (const auto & entry : filenames)
+    for (const auto & entry : images)
     {   
         Mat frame;
-        frame = imread( entry, cv::IMREAD_ANYCOLOR );
-        resize(frame, frame, Size(640, 480));
+        frame = imread( entry, IMREAD_ANYCOLOR );
+        //resize(frame, frame, Size(640, 480));
+        
         if ( !frame.data )
             continue;
 
-        //-- 3. Apply the classifier to the frame
-        cout << "Processing:" << entry << endl;
-        detectAndDisplay( frame, idx++ );
-        /*
-        if( waitKey(0) == 27 )
+        //cout << "Processing:" << entry << endl;
+        detectAndDisplay( frame, idx++, show );
+        if(show)
         {
-            break; // escape
+            if( waitKey(0) == 27 ) break; // quit (esc)
+            if( waitKey(0) == 2555904) continue; // next image (right arrow)
         }
-        else if( waitKey(0) == 2555904)
-        {
-            continue; // next image
-        }
-        */
     }
     return 0;
 }
 
 /** @function detectAndDisplay */
-void detectAndDisplay( Mat frame, int idx)
+void detectAndDisplay( Mat frame, int idx, bool show)
 {   
-    //Mat frame_gray;
-    //cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
-    //equalizeHist( frame_gray, frame_gray );
-
-    //-- Detect signs
-    std::vector<Rect> signs;
-    haar_cascade.detectMultiScale( frame, signs );
-
-    for ( size_t i = 0; i < signs.size(); i++ )
+    Mat frame_gray;
+    cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
+    equalizeHist( frame_gray, frame_gray );
+    bool found_signs = 0;
+    
+    map<string, CascadeClassifier>::iterator itr;
+    for (itr = haar_cascades.begin(); itr != haar_cascades.end(); ++itr) 
     {
-        Point center( signs[i].x + signs[i].width/2, signs[i].y + signs[i].height/2 );
-        ellipse( frame, center, Size( signs[i].width/2, signs[i].height/2 ), 0, 0, 360, Scalar( 255, 0, 255 ), 4 );
-
-        Mat faceROI = frame( signs[i] );
+        vector<Rect> signs;
+        itr->second.detectMultiScale( frame_gray, signs );
+        for ( size_t i = 0; i < signs.size(); i++ )
+        {
+            rectangle( frame, signs[i], Scalar( 0, 0, 255 ), 1);
+            putText(
+                frame, 
+                itr->first, 
+                Point(signs[i].x, signs[i].y-3), 
+                FONT_HERSHEY_SIMPLEX, 
+                0.3, Scalar(0,0,255), 1);
+        }
+        found_signs = (signs.size() > 0);
     }
 
-    // imshow( "Sign detection", frame );
-    string filename = "../data/detections/det_" + to_string(idx) + ".png";
-    imwrite(filename, frame );
-    cout << "Written results to: " << filename << endl;
-    cout << "------------------\n";
+    if(show) imshow("Traffic Sign Detection - Test", frame);
+    if(found_signs)
+    {
+        string filename = "../data/detection_results/det_" + to_string(idx) + ".png";
+        imwrite(filename, frame);
+        cout << "found sings written to: " << filename << endl;
+    }
 }

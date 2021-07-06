@@ -35,3 +35,7 @@
 */**/*.jpg
 */**/*.JPEG
 */**/*.png
+
+# Intermediate training files
+*/**/*stage*
+*/**/*stage*
