@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<cascade>
+  <stageType>BOOST</stageType>
+  <featureType>HAAR</featureType>
+  <height>32</height>
+  <width>32</width>
+  <stageParams>
+    <boostType>GAB</boostType>
+    <minHitRate>9.9500000476837158e-01</minHitRate>
+    <maxFalseAlarm>5.0000000000000000e-01</maxFalseAlarm>
+    <weightTrimRate>9.4999999999999996e-01</weightTrimRate>
+    <maxDepth>1</maxDepth>
+    <maxWeakCount>100</maxWeakCount></stageParams>
+  <featureParams>
+    <maxCatCount>0</maxCatCount>
+    <featSize>1</featSize>
+    <mode>ALL</mode></featureParams>
+  <stageNum>5</stageNum>
+  <stages>
+    <!-- stage 0 -->
+    <_>
+      <maxWeakCount>1</maxWeakCount>
+      <stageThreshold>1.</stageThreshold>
+      <weakClassifiers>
+        <_>
+          <internalNodes>
+            0 -1 0 -6.4935826230794191e-05</internalNodes>
+          <leafValues>
+            -1. 1.</leafValues></_></weakClassifiers></_>
+    <!-- stage 1 -->
+    <_>
+      <maxWeakCount>1</maxWeakCount>
+      <stageThreshold>9.0748691558837891e-01</stageThreshold>
+      <weakClassifiers>
+        <_>
+          <internalNodes>
+            0 -1 4 -1.2279351358301938e-04</internalNodes>
+          <leafValues>
+            -1. 9.0748691558837891e-01</leafValues></_></weakClassifiers></_>
+    <!-- stage 2 -->
+    <_>
+      <maxWeakCount>1</maxWeakCount>
+      <stageThreshold>8.9078819751739502e-01</stageThreshold>
+      <weakClassifiers>
+        <_>
+          <internalNodes>
+            0 -1 6 -2.9812466353178024e-02</internalNodes>
+          <leafValues>
+            8.9078819751739502e-01 -9.7986578941345215e-01</leafValues></_></weakClassifiers></_>
+    <!-- stage 3 -->
+    <_>
+      <maxWeakCount>2</maxWeakCount>
+      <stageThreshold>-2.1438100934028625e-01</stageThreshold>
+      <weakClassifiers>
+        <_>
+          <internalNodes>
+            0 -1 6 -8.6601659655570984e-02</internalNodes>
+          <leafValues>
+            -9.7201293706893921e-01 9.1887974739074707e-01</leafValues></_>
+        <_>
+          <internalNodes>
+            0 -1 5 -8.4183022379875183e-02</internalNodes>
+          <leafValues>
+            -9.8814791440963745e-01 7.5763189792633057e-01</leafValues></_></weakClassifiers></_>
+    <!-- stage 4 -->
+    <_>
+      <maxWeakCount>3</maxWeakCount>
+      <stageThreshold>-6.5498039126396179e-02</stageThreshold>
+      <weakClassifiers>
+        <_>
+          <internalNodes>
+            0 -1 2 -8.1404000520706177e-02</internalNodes>
+          <leafValues>
+            -9.2056739330291748e-01 7.1851849555969238e-01</leafValues></_>
+        <_>
+          <internalNodes>
+            0 -1 1 3.3524900674819946e-02</internalNodes>
+          <leafValues>
+            -8.9724743366241455e-01 5.0428181886672974e-01</leafValues></_>
+        <_>
+          <internalNodes>
+            0 -1 3 8.1847041845321655e-02</internalNodes>
+          <leafValues>
+            3.5078755021095276e-01 -9.6233290433883667e-01</leafValues></_></weakClassifiers></_></stages>
+  <features>
+    <_>
+      <rects>
+        <_>
+          0 0 3 1 -1.</_>
+        <_>
+          1 0 1 1 2.</_></rects>
+      <tilted>0</tilted></_>
+    <_>
+      <rects>
+        <_>
+          0 1 30 14 -1.</_>
+        <_>
+          15 1 15 14 2.</_></rects>
+      <tilted>0</tilted></_>
+    <_>
+      <rects>
+        <_>
+          0 2 32 30 -1.</_>
+        <_>
+          0 12 32 10 2.</_></rects>
+      <tilted>0</tilted></_>
+    <_>
+      <rects>
+        <_>
+          2 0 30 23 -1.</_>
+        <_>
+          17 0 15 23 2.</_></rects>
+      <tilted>0</tilted></_>
+    <_>
+      <rects>
+        <_>
+          4 0 3 32 -1.</_>
+        <_>
+          5 0 1 32 2.</_></rects>
+      <tilted>0</tilted></_>
+    <_>
+      <rects>
+        <_>
+          5 0 27 32 -1.</_>
+        <_>
+          14 0 9 32 2.</_></rects>
+      <tilted>0</tilted></_>
+    <_>
+      <rects>
+        <_>
+          5 1 27 30 -1.</_>
+        <_>
+          14 11 9 10 9.</_></rects>
+      <tilted>0</tilted></_></features></cascade>
+</opencv_storage>

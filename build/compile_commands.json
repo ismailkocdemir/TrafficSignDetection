@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/ismail/git_repos/TrafficSignDetection/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7   -isystem /home/ismail/.local/include -isystem /home/ismail/.local/include/opencv  -g   -std=gnu++1z -o CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o -c /home/ismail/git_repos/TrafficSignDetection/src/objectDetection.cpp",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7   -I/home/ismail/.local/include -I/home/ismail/.local/include/opencv    -o CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o -c /home/ismail/git_repos/TrafficSignDetection/src/objectDetection.cpp",
   "file": "/home/ismail/git_repos/TrafficSignDetection/src/objectDetection.cpp"
 }
 ]

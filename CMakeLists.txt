@@ -1,6 +1,7 @@
 cmake_minimum_required( VERSION 2.8 )
 project( ObjectDetection )
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(OpenCV_STATIC ON)
 set(OpenCV_CUDA OFF)

@@ -1,2 +1,15 @@
 # ninja log v5
-0	1048	1625477405	CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o	cc0b32cfa1909ffe
+0	2	0	clean	a7c70eacb11a5051
+0	551	1625491963	CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o	70d507307fee8fc0
+551	636	1625491963	ObjectDetection	c3a64a4f68ae3f0d
+0	3	0	clean	a7c70eacb11a5051
+0	622	1625491972	CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o	70d507307fee8fc0
+622	698	1625491973	ObjectDetection	c3a64a4f68ae3f0d
+0	579	1625492814	CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o	70d507307fee8fc0
+579	673	1625492814	ObjectDetection	c3a64a4f68ae3f0d
+0	556	1625493019	CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o	70d507307fee8fc0
+556	630	1625493019	ObjectDetection	c3a64a4f68ae3f0d
+0	555	1625493129	CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o	70d507307fee8fc0
+555	629	1625493129	ObjectDetection	c3a64a4f68ae3f0d
+0	551	1625493187	CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o	70d507307fee8fc0
+551	619	1625493187	ObjectDetection	c3a64a4f68ae3f0d

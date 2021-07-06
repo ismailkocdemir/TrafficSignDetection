@@ -32,6 +32,6 @@
 *.app
 
 # Images
-data/**/*.jpg
-data/**/*.JPEG
-data/**/*.png
+*/**/*.jpg
+*/**/*.JPEG
+*/**/*.png
