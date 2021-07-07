@@ -20,13 +20,14 @@ real positive samples (no augmentations), the other is trained on the generated 
 images of the traffic signs. 
 
 
-## Building Testing
+## Building/Testing
 
 Compilation of the source code (C++) requires CMake(>2.8) and OpenCV 3.4.
 To test the software run the only executable (TrafficSignDetection) by providing the cascade path (eg: data/cascades/real)
 and the directory where test images are located.
 
-The classifiers trained on the real images are trained on only subset of the signs, as some of them have no usable training samples.
+The classifiers trained on the real images are trained on only subset of the signs (50,70,100 signs, give-way, pass-right-side and pedestrian-crossing), since some of them have no usable training samples.
 The classifiers trained on generated images cover most of the signs making up majority of the dataset.
-However, the performance of both is not so good. There are problems both at region proposal stage and classification stage (e.g. speed signs 
+
+However, the performance of both is not so good. There are many missed signs both at region proposal stage and classification stage (e.g. speed signs 
 are mostly can't be differentiated)

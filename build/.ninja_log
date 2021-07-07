@@ -60,3 +60,5 @@
 688	838	1625687799	TrafficSignDetection	ce137c82f1e8c7aa
 0	721	1625688059	CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o	89a34683ad1ff84e
 721	862	1625688059	TrafficSignDetection	ce137c82f1e8c7aa
+0	668	1625689913	CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o	2a8eb37196c9ff0d
+668	803	1625689913	TrafficSignDetection	ce137c82f1e8c7aa

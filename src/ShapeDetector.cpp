@@ -19,7 +19,7 @@ void ShapeDetector::preprocess(Mat &image, Mat &thresh)
 
     // Apply thresholding/edge detection before finding conours.
     GaussianBlur(thresh, thresh, Size(3, 3), 0.0);
-    threshold(thresh, thresh, 200, 255, THRESH_BINARY);
+    threshold(thresh, thresh, 150, 255, THRESH_BINARY);
 
     // Improve the structure by first eroding then dilating
     Mat element_open = getStructuringElement( MORPH_RECT, Size(3, 3));
@@ -93,14 +93,12 @@ map<string, Rect> ShapeDetector::detect_shapes(const Mat &image, bool show)
     inRange(dummy, Scalar(0, 70, 50), Scalar(10, 255, 255), r_channel1);
     inRange(dummy, Scalar(170, 70, 50), Scalar(180, 255, 255), r_channel2);
     inRange(dummy, Scalar(100,150,0), Scalar(140,255,255), b_channel);
-    
-    preprocess(r_channel1, r_channel1);
-    preprocess(r_channel2, r_channel2);
-    preprocess(b_channel, b_channel);
-    //preprocess(gray, gray);
     Mat thresh = r_channel1 | r_channel2 | b_channel; // | gray;
     
-    //preprocess(thresh, thresh);
+    preprocess(thresh, thresh);
+    //preprocess(r_channel2, r_channel2);
+    //preprocess(b_channel, b_channel);
+    //preprocess(gray, gray);
 
     // Find contours and apply some heuristics to reduce the number of proposals.
     vector< vector<Point> > contours;
