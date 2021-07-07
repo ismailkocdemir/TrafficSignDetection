@@ -40,33 +40,38 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   restat = 1
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
-# Object build statements for EXECUTABLE target ObjectDetection
+# Object build statements for EXECUTABLE target TrafficSignDetection
 
 
 #############################################
-# Order-only phony target for ObjectDetection
+# Order-only phony target for TrafficSignDetection
 
-build cmake_object_order_depends_target_ObjectDetection: phony
-build CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o: CXX_COMPILER__ObjectDetection ../src/objectDetection.cpp || cmake_object_order_depends_target_ObjectDetection
-  DEP_FILE = CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o.d
+build cmake_object_order_depends_target_TrafficSignDetection: phony
+build CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o: CXX_COMPILER__TrafficSignDetection ../src/ShapeDetector.cpp || cmake_object_order_depends_target_TrafficSignDetection
+  DEP_FILE = CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o.d
   INCLUDES = -I/home/ismail/.local/include -I/home/ismail/.local/include/opencv
-  OBJECT_DIR = CMakeFiles/ObjectDetection.dir
-  OBJECT_FILE_DIR = CMakeFiles/ObjectDetection.dir/src
+  OBJECT_DIR = CMakeFiles/TrafficSignDetection.dir
+  OBJECT_FILE_DIR = CMakeFiles/TrafficSignDetection.dir/src
+build CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o: CXX_COMPILER__TrafficSignDetection ../src/TrafficSignDetection.cpp || cmake_object_order_depends_target_TrafficSignDetection
+  DEP_FILE = CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o.d
+  INCLUDES = -I/home/ismail/.local/include -I/home/ismail/.local/include/opencv
+  OBJECT_DIR = CMakeFiles/TrafficSignDetection.dir
+  OBJECT_FILE_DIR = CMakeFiles/TrafficSignDetection.dir/src
 
 # =============================================================================
-# Link build statements for EXECUTABLE target ObjectDetection
+# Link build statements for EXECUTABLE target TrafficSignDetection
 
 
 #############################################
-# Link the executable ObjectDetection
+# Link the executable TrafficSignDetection
 
-build ObjectDetection: CXX_EXECUTABLE_LINKER__ObjectDetection CMakeFiles/ObjectDetection.dir/src/objectDetection.cpp.o | /home/ismail/.local/lib/libopencv_dnn.so.3.4.14 /home/ismail/.local/lib/libopencv_highgui.so.3.4.14 /home/ismail/.local/lib/libopencv_ml.so.3.4.14 /home/ismail/.local/lib/libopencv_objdetect.so.3.4.14 /home/ismail/.local/lib/libopencv_shape.so.3.4.14 /home/ismail/.local/lib/libopencv_stitching.so.3.4.14 /home/ismail/.local/lib/libopencv_superres.so.3.4.14 /home/ismail/.local/lib/libopencv_videostab.so.3.4.14 /home/ismail/.local/lib/libopencv_calib3d.so.3.4.14 /home/ismail/.local/lib/libopencv_features2d.so.3.4.14 /home/ismail/.local/lib/libopencv_flann.so.3.4.14 /home/ismail/.local/lib/libopencv_photo.so.3.4.14 /home/ismail/.local/lib/libopencv_video.so.3.4.14 /home/ismail/.local/lib/libopencv_videoio.so.3.4.14 /home/ismail/.local/lib/libopencv_imgcodecs.so.3.4.14 /home/ismail/.local/lib/libopencv_imgproc.so.3.4.14 /home/ismail/.local/lib/libopencv_core.so.3.4.14
+build TrafficSignDetection: CXX_EXECUTABLE_LINKER__TrafficSignDetection CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o | /home/ismail/.local/lib/libopencv_dnn.so.3.4.14 /home/ismail/.local/lib/libopencv_highgui.so.3.4.14 /home/ismail/.local/lib/libopencv_ml.so.3.4.14 /home/ismail/.local/lib/libopencv_objdetect.so.3.4.14 /home/ismail/.local/lib/libopencv_shape.so.3.4.14 /home/ismail/.local/lib/libopencv_stitching.so.3.4.14 /home/ismail/.local/lib/libopencv_superres.so.3.4.14 /home/ismail/.local/lib/libopencv_videostab.so.3.4.14 /home/ismail/.local/lib/libopencv_calib3d.so.3.4.14 /home/ismail/.local/lib/libopencv_features2d.so.3.4.14 /home/ismail/.local/lib/libopencv_flann.so.3.4.14 /home/ismail/.local/lib/libopencv_photo.so.3.4.14 /home/ismail/.local/lib/libopencv_video.so.3.4.14 /home/ismail/.local/lib/libopencv_videoio.so.3.4.14 /home/ismail/.local/lib/libopencv_imgcodecs.so.3.4.14 /home/ismail/.local/lib/libopencv_imgproc.so.3.4.14 /home/ismail/.local/lib/libopencv_core.so.3.4.14
   LINK_LIBRARIES = -Wl,-rpath,/home/ismail/.local/lib /home/ismail/.local/lib/libopencv_dnn.so.3.4.14 /home/ismail/.local/lib/libopencv_highgui.so.3.4.14 /home/ismail/.local/lib/libopencv_ml.so.3.4.14 /home/ismail/.local/lib/libopencv_objdetect.so.3.4.14 /home/ismail/.local/lib/libopencv_shape.so.3.4.14 /home/ismail/.local/lib/libopencv_stitching.so.3.4.14 /home/ismail/.local/lib/libopencv_superres.so.3.4.14 /home/ismail/.local/lib/libopencv_videostab.so.3.4.14 /home/ismail/.local/lib/libopencv_calib3d.so.3.4.14 /home/ismail/.local/lib/libopencv_features2d.so.3.4.14 /home/ismail/.local/lib/libopencv_flann.so.3.4.14 /home/ismail/.local/lib/libopencv_photo.so.3.4.14 /home/ismail/.local/lib/libopencv_video.so.3.4.14 /home/ismail/.local/lib/libopencv_videoio.so.3.4.14 /home/ismail/.local/lib/libopencv_imgcodecs.so.3.4.14 /home/ismail/.local/lib/libopencv_imgproc.so.3.4.14 /home/ismail/.local/lib/libopencv_core.so.3.4.14
-  OBJECT_DIR = CMakeFiles/ObjectDetection.dir
+  OBJECT_DIR = CMakeFiles/TrafficSignDetection.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = ObjectDetection
-  TARGET_PDB = ObjectDetection.dbg
+  TARGET_FILE = TrafficSignDetection
+  TARGET_PDB = TrafficSignDetection.dbg
 
 #############################################
 # Utility command for edit_cache
@@ -95,7 +100,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 #############################################
 # The main all target.
 
-build all: phony ObjectDetection
+build all: phony TrafficSignDetection
 
 #############################################
 # Make the all target the default.

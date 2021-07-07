@@ -11,8 +11,10 @@ def train_cascades_all_signs():
         cascade_name = vec_f.split('/')[-1].split('.')[0].split('_')
         if "real" in cascade_name:
             cascade_dir.append("real")
-        else:
+        elif "augmented" in cascade_name:
             cascade_dir.append("augmented")
+        else:
+            cascade_dir.append("template")
 
         sign_name = cascade_name[1:-1]
         if len(sign_name) == 1:
@@ -31,8 +33,8 @@ def train_cascades_all_signs():
                 num_pos = int(f.readlines()[0])
 
         os.system("opencv_traincascade -data {} -vec {} -bg {} -numPos {} \
-            -w 32 -h 32 \
-            -mode ALL -acceptanceRatioBreakValue 10e-5 \
+            -numNeg 1458 -mode ALL \
+            -acceptanceRatioBreakValue 10e-5 \
             -numStages 20  -maxFalseAlarmRate 0.5".format(
                                                         overall_dir,
                                                         vec_f,

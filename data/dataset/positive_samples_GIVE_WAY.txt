@@ -1,0 +1,89 @@
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000022.jpg 1 209 665 19 16
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000027.jpg 1 218 661 19 17
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000032.jpg 1 237 649 19 19
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000037.jpg 1 245 653 20 19
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000042.jpg 1 258 641 24 20
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000047.jpg 1 280 632 27 22
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000052.jpg 1 305 621 28 26
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000057.jpg 1 346 610 35 31
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000062.jpg 1 390 597 34 33
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000067.jpg 1 426 581 41 37
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000072.jpg 1 459 563 44 42
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000077.jpg 1 503 542 49 47
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000082.jpg 1 561 516 56 54
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000087.jpg 1 590 495 61 62
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000092.jpg 1 620 472 68 63
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000097.jpg 1 692 426 85 77
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383342Image000102.jpg 1 772 371 100 96
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383413Image000018.jpg 1 515 655 24 23
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383413Image000023.jpg 1 536 633 28 28
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383413Image000028.jpg 1 551 624 34 27
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383413Image000033.jpg 1 565 613 32 29
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383413Image000038.jpg 1 573 603 39 34
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383422Image000001.jpg 1 753 360 114 103
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383422Image000006.jpg 1 775 317 121 111
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383422Image000011.jpg 1 794 288 137 122
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383425Image000001.jpg 1 886 181 165 151
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277383425Image000006.jpg 1 888 180 159 150
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386980Image000004.jpg 1 657 771 25 20
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386980Image000009.jpg 1 650 747 27 24
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386980Image000014.jpg 1 656 737 31 30
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386980Image000019.jpg 1 665 731 33 29
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386980Image000024.jpg 1 674 724 36 33
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386980Image000029.jpg 1 695 709 45 38
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386980Image000034.jpg 1 753 693 47 45
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386980Image000039.jpg 1 848 672 58 50
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386986Image000003.jpg 1 1087 636 80 70
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277386986Image000008.jpg 1 1094 644 80 71
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387083Image000001.jpg 2 792 721 38 35 242 712 41 36
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387083Image000006.jpg 2 862 717 44 41 251 716 49 38
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387083Image000011.jpg 2 924 703 50 44 255 709 52 47
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387083Image000016.jpg 2 988 689 54 48 246 698 52 53
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387083Image000021.jpg 2 1051 672 62 56 221 690 64 60
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387083Image000026.jpg 2 1132 612 77 72 171 640 69 68
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387083Image000031.jpg 1 92 600 86 75
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387117Image000002.jpg 1 1148 640 42 42
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387117Image000007.jpg 1 1189 628 46 53
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387743Image000051.jpg 1 751 704 30 26
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387743Image000066.jpg 1 754 705 31 28
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387743Image000071.jpg 1 758 704 28 29
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387763Image000001.jpg 1 808 656 59 49
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387763Image000016.jpg 1 817 606 66 64
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387763Image000031.jpg 1 836 536 89 82
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387763Image000046.jpg 1 901 428 138 117
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387763Image000051.jpg 1 919 407 138 131
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277387763Image000066.jpg 1 996 307 173 155
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277388958Image000046.jpg 1 1238 704 31 34
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000066.jpg 1 568 770 18 16
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000071.jpg 1 579 765 18 15
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000076.jpg 1 588 759 21 18
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000081.jpg 2 603 747 17 19 330 745 19 20
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000086.jpg 2 616 741 21 21 319 737 25 22
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000091.jpg 2 633 731 22 24 308 727 25 22
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000096.jpg 2 647 727 28 26 292 720 27 25
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000101.jpg 2 669 711 30 29 270 705 28 29
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000106.jpg 2 690 700 32 32 253 694 29 30
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000111.jpg 2 726 690 35 34 231 681 35 34
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000116.jpg 2 777 668 48 44 186 662 48 44
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000121.jpg 2 830 649 56 53 131 649 55 55
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000126.jpg 2 880 625 65 61 72 633 64 59
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000131.jpg 1 958 596 73 73
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000136.jpg 1 1042 561 96 90
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000141.jpg 2 1138 517 115 113 883 672 7 18
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391617Image000146.jpg 1 868 683 7 15
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000088.jpg 1 373 728 23 21
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000093.jpg 1 351 724 24 22
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000098.jpg 1 335 728 22 24
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000103.jpg 2 794 714 27 25 315 716 30 27
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000108.jpg 2 850 703 28 29 293 712 31 30
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000113.jpg 2 921 683 37 33 267 705 35 36
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000118.jpg 2 989 656 48 49 235 689 58 43
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000123.jpg 2 1096 628 60 46 200 667 53 47
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391651Image000133.jpg 1 49 596 82 75
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391703Image000123.jpg 2 754 689 27 24 385 714 23 23
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391703Image000133.jpg 2 854 665 31 29 379 700 35 30
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391703Image000138.jpg 2 907 656 40 35 369 697 39 37
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391703Image000148.jpg 2 1018 624 47 43 342 677 50 49
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391703Image000158.jpg 2 1173 577 60 59 289 649 56 58
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391703Image000168.jpg 1 175 600 70 82
+/home/ismail/git_repos/TrafficSignDetection/data/dataset/img/1277391703Image000173.jpg 1 57 560 83 93

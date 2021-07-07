@@ -4,32 +4,32 @@ x86_64
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/ismail/git_repos/TrafficSignDetection/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/ninja" "cmTC_4ada1"
-[1/2] Building C object CMakeFiles/cmTC_4ada1.dir/testCCompiler.c.o
-[2/2] Linking C executable cmTC_4ada1
+Run Build Command:"/usr/bin/ninja" "cmTC_5ce57"
+[1/2] Building C object CMakeFiles/cmTC_5ce57.dir/testCCompiler.c.o
+[2/2] Linking C executable cmTC_5ce57
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/ismail/git_repos/TrafficSignDetection/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/ninja" "cmTC_0331a"
-[1/2] Building C object CMakeFiles/cmTC_0331a.dir/CMakeCCompilerABI.c.o
-[2/2] Linking C executable cmTC_0331a
+Run Build Command:"/usr/bin/ninja" "cmTC_e91dc"
+[1/2] Building C object CMakeFiles/cmTC_e91dc.dir/CMakeCCompilerABI.c.o
+[2/2] Linking C executable cmTC_e91dc
 
 
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/ismail/git_repos/TrafficSignDetection/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/ninja" "cmTC_095ed"
-[1/2] Building CXX object CMakeFiles/cmTC_095ed.dir/testCXXCompiler.cxx.o
-[2/2] Linking CXX executable cmTC_095ed
+Run Build Command:"/usr/bin/ninja" "cmTC_fe19f"
+[1/2] Building CXX object CMakeFiles/cmTC_fe19f.dir/testCXXCompiler.cxx.o
+[2/2] Linking CXX executable cmTC_fe19f
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/ismail/git_repos/TrafficSignDetection/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/ninja" "cmTC_87dae"
-[1/2] Building CXX object CMakeFiles/cmTC_87dae.dir/CMakeCXXCompilerABI.cpp.o
-[2/2] Linking CXX executable cmTC_87dae
+Run Build Command:"/usr/bin/ninja" "cmTC_2d3d6"
+[1/2] Building CXX object CMakeFiles/cmTC_2d3d6.dir/CMakeCXXCompilerABI.cpp.o
+[2/2] Linking CXX executable cmTC_2d3d6
 
 
