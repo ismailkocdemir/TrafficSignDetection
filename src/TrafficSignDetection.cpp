@@ -14,8 +14,10 @@ using namespace cv;
 
 
 /** Function Headers */
+// Works on sign proposals
 void classifyAndDisplay( Mat &frame, map<string, Rect> &shapes, int idx, bool show);
-
+// Directly detects from entire image*/
+void detectAndDisplay( Mat &frame, int idx, bool show);
 
 /** Haar-Based Cascade Classifier for each Traffic Sign */
 map<string, CascadeClassifier> haar_cascades;
@@ -25,12 +27,13 @@ map<string, CascadeClassifier> haar_cascades;
 int main( int argc, const char** argv )
 {
     CommandLineParser parser(argc, argv,
-                             "{help h       |                            |                                       }"
-                             "{show s       |                            | if given, will show detections in GUI }"
-                             "{cascade_dir  | ../data/cascades/real      | Path to cascade (real or template)    }"
-                             "{test_dir     | ../data/dataset/img_test   | Test image directory                  }");
+                             "{help h          |                              |                                                }"
+                             "{show s          |                              | if given, show detections with GUI             }"
+                             "{use_proposals p |                              | apply the classifier on top of proposal module }"
+                             "{cascade_dir   c | ../data/cascades/real        | path to haar-based cascade (pretrained)        }"
+                             "{test_dir      d | ../data/dataset/img_test     | test image directory                           }");
 
-    parser.about( "\nThis program demonstrates the usage of cv::CascadeClassifier class to classify traffic signs.\n" );
+    parser.about( "\n cv::CascadeClassifier class to classify traffic signs.\n " );
 
     bool help = parser.has("help");
     if (help)
@@ -42,6 +45,7 @@ int main( int argc, const char** argv )
     String cascade_dir = parser.get<String>("cascade_dir");
     String test_dir = parser.get<String>("test_dir");
     bool show = parser.has("show");
+    bool use_proposals = parser.has("use_proposals");
 
     if( !utils::fs::isDirectory(test_dir) )
     {
@@ -87,20 +91,29 @@ int main( int argc, const char** argv )
     {   
         Mat frame;
         frame = imread( entry, IMREAD_ANYCOLOR );
-        
+        //resize(frame, frame, Size(640,480));
         
         if ( !frame.data )
             continue;
 
-        // get region proposals from the image using some shape heuristics.
-        map<string,Rect> proposals = shape_detector.detect_shapes(frame, show);
-        // validate and classify the region proposals by Cascaded Classifier.
-        classifyAndDisplay( frame, proposals, idx++, show);
+        if (use_proposals)
+        {
+            // get region proposals from the image using some shape/color heuristics.
+            map<string,Rect> proposals = shape_detector.detect_shapes(frame, show);
+            //validate and classify the region proposals by Cascaded Classifier.
+            classifyAndDisplay( frame, proposals, idx++, show);
+        }
+        else
+        {   
+            // run the cascade classifier directly on the image.
+            // does not work well.
+            detectAndDisplay( frame, idx++, show);
+        }
         
         if(show)
         {
-            if( waitKey(0) == 27 ) break; // quit (esc)
-            if( waitKey(0) == 2555904) continue; // next image (arrow)
+            if( waitKey(500) == 27 ) break; // quit (esc)
+            if( waitKey(500) == 2555904) continue; // next image (arrow)
         }
 
     }
@@ -114,33 +127,86 @@ void classifyAndDisplay( Mat &frame, map<string, Rect> &proposals, int idx, bool
     Mat frame_gray;
     cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
     equalizeHist( frame_gray, frame_gray );
-    bool found_sign = 0;
     
     // loop trough the proposals.
     map<string, Rect>::iterator itr_1;
     for (itr_1 = proposals.begin(); itr_1 != proposals.end(); ++itr_1)
     {   
+        double max_certainity = 0;
+        String most_certain_sign; 
+
+        Mat crop = frame_gray(itr_1->second);
+        resize(crop, crop, Size(100, 100));
         // loop trough the classifiers for each sign, given this specific proposal.
         map<string, CascadeClassifier>::iterator itr_2;
         for (itr_2 = haar_cascades.begin(); itr_2 != haar_cascades.end(); ++itr_2) 
         {
             vector<Rect> signs;
-            itr_2->second.detectMultiScale( frame_gray, signs );
+            vector<double> weights;
+            vector<int> levels;
             
-            // if we find can classify the sign, we break out of the loop of classifiers and be done with this proposal.
-            found_sign = (signs.size() > 0);
-            if (found_sign)
+            itr_2->second.detectMultiScale(crop, signs, levels, weights, 1.1, 3, 0, Size(), Size(), true);
+
+            int det_idx = 0;
+            for(const auto sign : signs)
             {
-                // draw the bounding box and the sign label on the image.
-                rectangle( frame, itr_1->second, Scalar( 255, 0, 255 ), 4);
-                putText(
-                    frame, // original image
-                    itr_2->first, // sign category
-                    Point(itr_1->second.x, itr_1->second.y-3), // text location
-                    FONT_HERSHEY_SIMPLEX,  // font
-                    0.5, Scalar(255,0,255), 2); // size and color
-                break;
+                if(weights[det_idx] > max_certainity){
+                    max_certainity = weights[det_idx];
+                    most_certain_sign = itr_2->first;
+                }
+                ++det_idx;
             }
+        }
+        if(max_certainity > 0)
+        {
+            Rect original_rect =  itr_1->second - Size(50,50) + Point(25, 25);
+            // draw the bounding box and the sign label on the image.
+            rectangle( frame, original_rect, Scalar( 255, 0, 255 ), 4);
+            putText(
+                frame, // original image
+                most_certain_sign + " " + to_string(max_certainity), // sign category + certainity
+                Point(original_rect.x, original_rect.y-3), // text location
+                FONT_HERSHEY_SIMPLEX,  // font
+                0.5, Scalar(255,0,255), 2); // size and color
+        }
+    }
+    
+    if(show) imshow("Traffic Sign Detection - Test", frame);
+    
+    string filename = "../data/detection_results/det_" + to_string(idx) + ".jpg";
+    imwrite(filename, frame);
+    cout << "detection results are written to: " << filename << endl;
+    
+}
+
+/** @function detectAndDisplay */
+void detectAndDisplay( Mat &frame, int idx, bool show)
+{   
+    Mat frame_gray;
+    cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
+    equalizeHist( frame_gray, frame_gray );
+
+    // loop trough the classifiers.
+    map<string, CascadeClassifier>::iterator itr_2;
+    for (itr_2 = haar_cascades.begin(); itr_2 != haar_cascades.end(); ++itr_2) 
+    {
+        vector<Rect> signs;
+        vector<double> weights;
+        vector<int> levels;
+        itr_2->second.detectMultiScale( frame_gray, signs, levels, weights, 1.1, 3, 0, Size(), Size(), true);
+        int det_idx = 0;
+        for(const auto sign : signs)
+        {   
+            if (weights[det_idx] < 0)
+                continue;
+            // draw the bounding box and the sign label on the image.
+            rectangle( frame, sign, Scalar( 255, 0, 255 ), 4);
+            putText(
+                frame, // original image
+                itr_2->first + " " + to_string(weights[det_idx++]), // sign category
+                Point(sign.x, sign.y-3), // text location
+                FONT_HERSHEY_SIMPLEX,  // font
+                0.5, Scalar(255,0,255), 2); // size and color
         }
     }
     

@@ -3,8 +3,8 @@ project( ObjectDetection )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#set(OpenCV_STATIC ON)
-#set(OpenCV_CUDA OFF)
+set(OpenCV_STATIC ON)
+set(OpenCV_CUDA OFF)
 
 find_package( OpenCV REQUIRED )
 

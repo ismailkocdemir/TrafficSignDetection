@@ -29,12 +29,16 @@ def get_average_brightness_from_bbox(image_file, bbox, remove_outliers=True):
     return (log_avg - log_min)/(log_max - log_min)
 
 
-def save_bbox_as_image(image_file, bbox, save_path):
+def save_bbox_as_image(image_file, bbox, save_path, resize=0):
     '''save the given bbox to the save_path as image'''
+    new_image = cv2.imread(image_file, 
+                            cv2.IMREAD_COLOR)[bbox[1]:bbox[1]+bbox[3], bbox[0]:bbox[0]+bbox[2]]
+                        
+    if resize:
+        new_image = cv2.resize(new_image, (resize, resize))
     cv2.imwrite(
             save_path,
-            cv2.imread(image_file, 
-                cv2.IMREAD_COLOR)[bbox[1]:bbox[1]+bbox[3], bbox[0]:bbox[0]+bbox[2]]
+            new_image
     )
 
 def save_random_crops(image_file, min_size, max_size, num_crops):
@@ -72,7 +76,7 @@ def save_random_crops(image_file, min_size, max_size, num_crops):
                             )
 
         new_file_names.append(new_file_name)
-        save_bbox_as_image(image_file, crop, new_file_name)
+        save_bbox_as_image(image_file, crop, new_file_name, 100)
         idx += 1
 
     return new_file_names
@@ -208,6 +212,7 @@ def prepare_training_data(
                     # image contains signs with bbox information                    
                     if sign_info[0] != 'MISC_SIGNS':
                         is_misc = False
+                        
                         if use_templates:
                             continue
                         # only collect a single sign
@@ -216,15 +221,18 @@ def prepare_training_data(
                         # only collect signs that are tagged as visible, rather than blurred or occluded.
                         if visible_only and sign_info[0].strip() != "VISIBLE":
                             continue
+                        
                         coords = [int(floor(float(item))) for item in sign_info[1:5]]
                         coords = coords[2], coords[3], coords[0] - coords[2], coords[1] - coords[3] 
                         coords = list(coords)
+                        
                         # fix boxes that goes out ouf bound
                         if coords[0] + coords[2] >= 1280:
                             coords[2] = 1280 - coords[0] - 1
                         if coords[1] + coords[3] >= 960:
                             coords[3] = 960 - coords[1] - 1
-                        # we will find a large enough bbox with good bightness, which will be used to generate augmented samples.
+                        
+                        # we will find a large enough bbox with good brightness, which will be used to generate augmented samples.
                         if sign_filter and use_augmented_data:
                             avg_br = get_average_brightness_from_bbox(os.path.join(image_folder, image_name), coords)
                             area = coords[2] * coords[3]
@@ -236,27 +244,30 @@ def prepare_training_data(
                         else:
                             coords = ' '.join([str(c) for c in coords])
                             sign_coords.append(coords)
+                
                 if not (sign_filter and use_augmented_data) and len(sign_coords) > 0:
                     object_count += len(sign_coords)
                     num_of_samples = str(len(sign_coords))
                     coords_all = ' '.join(sign_coords)
                     new_line = new_line + ' ' + num_of_samples + ' ' + coords_all
                     positive_lines.append(new_line)
+                
                 # no bbox label found
                 if is_misc:
                     negative_lines.append(new_line)
+            
             # no sign found
             else:
                 negative_lines.append(new_line)
     ##################### POSITIVE COLLECTION ENDS ##########################################
 
 
-    #################### COLLECT THE NEGATIVE SAMPLES (background) FROM GIVEN FOLDER ########
+    #################### CREATE THE NEGATIVE SAMPLES (background) FROM GIVEN FOLDER ########
     if extra_background and create_negative_samples:
         new_negative_lines = []
         for i, img_path in enumerate(negative_lines):
             print("Creating negative samples by cropping {}/{}".format(i, len(negative_lines)), end='\r')
-            new_negative_lines += save_random_crops(img_path, 50, 500, 3)
+            new_negative_lines += save_random_crops(img_path, 50, 300, 5)
         
         negative_lines = new_negative_lines
         '''
@@ -284,10 +295,7 @@ def prepare_training_data(
     ### else, just write the list of all positive collected samples (from all signs) to the file
     elif object_count > 10:
         vec_filename += "_{}_real".format(sign_filter) if sign_filter else'_ALLSIGNS_real'
-        positive_filename = "positive_samples" + ("_{}".format(sign_filter) if sign_filter else'_ALLSIGNS')
-        #if visible_only:
-        #    positive_filename += "_visible"
-        #    vec_filename += "_visible"            
+        positive_filename = "positive_samples" + ("_{}".format(sign_filter) if sign_filter else'_ALLSIGNS')               
         positive_filename += ".txt"
         with open(positive_filename, 'w+') as ps:
             for l in positive_lines:
@@ -311,7 +319,7 @@ def prepare_training_data(
             os.system('opencv_createsamples -img {} -vec {} -num {} -w 24 -h 24'.format(
                         sign_save_path if largest_image else "templates/{}.png".format(sign_filter), 
                         vec_filename,
-                        2000
+                        3000
                         )
             )
 
@@ -331,15 +339,15 @@ def prepare_training_data(
 
 
 if __name__ == '__main__':
-    #parse_annotations('dataset/annotations.txt', visible_only=True) # just for extracting some info.
+    parse_annotations('data/dataset/annotations_test.txt', visible_only=True) # just for extracting some info.
 
-    options = [(0,0)]
+    options = [(0,1)]
     script_path = os.path.dirname(os.path.realpath(__file__))
     os.chdir(os.path.join(script_path, 'data/dataset'))
     idx = 0   
     for sgn,freq in SIGNS_VISIBLE_ONLY.items():
-        if sgn not in ['PEDESTRIAN_CROSSING', '100_SIGN', '70_SIGN', 'PRIORITY_ROAD', 'GIVE_WAY', 'PASS_RIGHT_SIDE']:
-            continue
+        #if sgn not in ['100_SIGN', '70_SIGN', '50_SIGN', 'PEDESTRIAN_CROSSING', 'GIVE_WAY', 'PASS_RIGHT_SIDE']:
+        #    continue
         for a,t in options:
             prepare_training_data(
                 '/home/ismail/git_repos/TrafficSignDetection/data/dataset/img', 
@@ -349,8 +357,6 @@ if __name__ == '__main__':
                 sign_filter=sgn,
                 use_augmented_data=a,
                 use_templates=t,
-                create_negative_samples=(idx == 0)  
+                create_negative_samples=False #(idx == 0)  
             )
             idx += 1
-        
-

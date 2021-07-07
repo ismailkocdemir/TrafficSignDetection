@@ -26,6 +26,7 @@ public:
 private:
     string identify_shape(const Mat &curve);
     double angle(Point pt1, Point pt2, Point pt0);
+    void preprocess(Mat &image, Mat &thresh);
 
 };
 

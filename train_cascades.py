@@ -25,15 +25,18 @@ def train_cascades_all_signs():
         overall_dir = os.path.join(*cascade_dir)
         if not os.path.exists(overall_dir):
             os.makedirs(overall_dir)
+        else:
+            continue
         
         background_image_list = "data/dataset/negative_samples.txt"
-        num_pos = 2000
+        num_pos = 3000
         if 'real' in cascade_dir:
             with open("data/dataset/count_{}.txt".format(cascade_dir[-1]), 'r') as f:
                 num_pos = int(f.readlines()[0])
 
-        os.system("opencv_traincascade -data {} -vec {} -bg {} -numPos {} \
-            -numNeg 1458 -mode ALL \
+        os.system(
+            "opencv_traincascade -data {} -vec {} -bg {} -numPos {} \
+            -numNeg 2430 -mode ALL \
             -acceptanceRatioBreakValue 10e-5 \
             -numStages 20  -maxFalseAlarmRate 0.5".format(
                                                         overall_dir,
