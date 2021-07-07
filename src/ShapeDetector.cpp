@@ -96,9 +96,6 @@ map<string, Rect> ShapeDetector::detect_shapes(const Mat &image, bool show)
     Mat thresh = r_channel1 | r_channel2 | b_channel; // | gray;
     
     preprocess(thresh, thresh);
-    //preprocess(r_channel2, r_channel2);
-    //preprocess(b_channel, b_channel);
-    //preprocess(gray, gray);
 
     // Find contours and apply some heuristics to reduce the number of proposals.
     vector< vector<Point> > contours;
