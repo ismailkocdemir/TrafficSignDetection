@@ -34,7 +34,7 @@ include rules.ninja
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ismail/git_repos/TrafficSignDetection/build && /usr/bin/cmake -H/home/ismail/git_repos/TrafficSignDetection -B/home/ismail/git_repos/TrafficSignDetection/build
+  COMMAND = cd /home/ismail/TrafficSignDetection/build && /usr/bin/cmake -H/home/ismail/TrafficSignDetection -B/home/ismail/TrafficSignDetection/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -49,12 +49,12 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 build cmake_object_order_depends_target_TrafficSignDetection: phony
 build CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o: CXX_COMPILER__TrafficSignDetection ../src/ShapeDetector.cpp || cmake_object_order_depends_target_TrafficSignDetection
   DEP_FILE = CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o.d
-  INCLUDES = -I/home/ismail/.local/include -I/home/ismail/.local/include/opencv
+  INCLUDES = -I/usr/local/include -I/usr/local/include/opencv
   OBJECT_DIR = CMakeFiles/TrafficSignDetection.dir
   OBJECT_FILE_DIR = CMakeFiles/TrafficSignDetection.dir/src
 build CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o: CXX_COMPILER__TrafficSignDetection ../src/TrafficSignDetection.cpp || cmake_object_order_depends_target_TrafficSignDetection
   DEP_FILE = CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o.d
-  INCLUDES = -I/home/ismail/.local/include -I/home/ismail/.local/include/opencv
+  INCLUDES = -I/usr/local/include -I/usr/local/include/opencv
   OBJECT_DIR = CMakeFiles/TrafficSignDetection.dir
   OBJECT_FILE_DIR = CMakeFiles/TrafficSignDetection.dir/src
 
@@ -65,8 +65,8 @@ build CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o: CXX_CO
 #############################################
 # Link the executable TrafficSignDetection
 
-build TrafficSignDetection: CXX_EXECUTABLE_LINKER__TrafficSignDetection CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o | /home/ismail/.local/lib/libopencv_dnn.so.3.4.14 /home/ismail/.local/lib/libopencv_highgui.so.3.4.14 /home/ismail/.local/lib/libopencv_ml.so.3.4.14 /home/ismail/.local/lib/libopencv_objdetect.so.3.4.14 /home/ismail/.local/lib/libopencv_shape.so.3.4.14 /home/ismail/.local/lib/libopencv_stitching.so.3.4.14 /home/ismail/.local/lib/libopencv_superres.so.3.4.14 /home/ismail/.local/lib/libopencv_videostab.so.3.4.14 /home/ismail/.local/lib/libopencv_calib3d.so.3.4.14 /home/ismail/.local/lib/libopencv_features2d.so.3.4.14 /home/ismail/.local/lib/libopencv_flann.so.3.4.14 /home/ismail/.local/lib/libopencv_photo.so.3.4.14 /home/ismail/.local/lib/libopencv_video.so.3.4.14 /home/ismail/.local/lib/libopencv_videoio.so.3.4.14 /home/ismail/.local/lib/libopencv_imgcodecs.so.3.4.14 /home/ismail/.local/lib/libopencv_imgproc.so.3.4.14 /home/ismail/.local/lib/libopencv_core.so.3.4.14
-  LINK_LIBRARIES = -Wl,-rpath,/home/ismail/.local/lib /home/ismail/.local/lib/libopencv_dnn.so.3.4.14 /home/ismail/.local/lib/libopencv_highgui.so.3.4.14 /home/ismail/.local/lib/libopencv_ml.so.3.4.14 /home/ismail/.local/lib/libopencv_objdetect.so.3.4.14 /home/ismail/.local/lib/libopencv_shape.so.3.4.14 /home/ismail/.local/lib/libopencv_stitching.so.3.4.14 /home/ismail/.local/lib/libopencv_superres.so.3.4.14 /home/ismail/.local/lib/libopencv_videostab.so.3.4.14 /home/ismail/.local/lib/libopencv_calib3d.so.3.4.14 /home/ismail/.local/lib/libopencv_features2d.so.3.4.14 /home/ismail/.local/lib/libopencv_flann.so.3.4.14 /home/ismail/.local/lib/libopencv_photo.so.3.4.14 /home/ismail/.local/lib/libopencv_video.so.3.4.14 /home/ismail/.local/lib/libopencv_videoio.so.3.4.14 /home/ismail/.local/lib/libopencv_imgcodecs.so.3.4.14 /home/ismail/.local/lib/libopencv_imgproc.so.3.4.14 /home/ismail/.local/lib/libopencv_core.so.3.4.14
+build TrafficSignDetection: CXX_EXECUTABLE_LINKER__TrafficSignDetection CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o | /usr/local/lib/libopencv_dnn.so.3.4.14 /usr/local/lib/libopencv_highgui.so.3.4.14 /usr/local/lib/libopencv_ml.so.3.4.14 /usr/local/lib/libopencv_objdetect.so.3.4.14 /usr/local/lib/libopencv_shape.so.3.4.14 /usr/local/lib/libopencv_stitching.so.3.4.14 /usr/local/lib/libopencv_superres.so.3.4.14 /usr/local/lib/libopencv_videostab.so.3.4.14 /usr/local/lib/libopencv_calib3d.so.3.4.14 /usr/local/lib/libopencv_features2d.so.3.4.14 /usr/local/lib/libopencv_flann.so.3.4.14 /usr/local/lib/libopencv_photo.so.3.4.14 /usr/local/lib/libopencv_video.so.3.4.14 /usr/local/lib/libopencv_videoio.so.3.4.14 /usr/local/lib/libopencv_imgcodecs.so.3.4.14 /usr/local/lib/libopencv_imgproc.so.3.4.14 /usr/local/lib/libopencv_core.so.3.4.14
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib /usr/local/lib/libopencv_dnn.so.3.4.14 /usr/local/lib/libopencv_highgui.so.3.4.14 /usr/local/lib/libopencv_ml.so.3.4.14 /usr/local/lib/libopencv_objdetect.so.3.4.14 /usr/local/lib/libopencv_shape.so.3.4.14 /usr/local/lib/libopencv_stitching.so.3.4.14 /usr/local/lib/libopencv_superres.so.3.4.14 /usr/local/lib/libopencv_videostab.so.3.4.14 /usr/local/lib/libopencv_calib3d.so.3.4.14 /usr/local/lib/libopencv_features2d.so.3.4.14 /usr/local/lib/libopencv_flann.so.3.4.14 /usr/local/lib/libopencv_photo.so.3.4.14 /usr/local/lib/libopencv_video.so.3.4.14 /usr/local/lib/libopencv_videoio.so.3.4.14 /usr/local/lib/libopencv_imgcodecs.so.3.4.14 /usr/local/lib/libopencv_imgproc.so.3.4.14 /usr/local/lib/libopencv_core.so.3.4.14
   OBJECT_DIR = CMakeFiles/TrafficSignDetection.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -77,7 +77,7 @@ build TrafficSignDetection: CXX_EXECUTABLE_LINKER__TrafficSignDetection CMakeFil
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ismail/git_repos/TrafficSignDetection/build && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/ismail/TrafficSignDetection/build && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 build edit_cache: phony CMakeFiles/edit_cache.util
@@ -110,13 +110,13 @@ default all
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /home/ismail/.local/share/OpenCV/OpenCVConfig-version.cmake /home/ismail/.local/share/OpenCV/OpenCVConfig.cmake /home/ismail/.local/share/OpenCV/OpenCVModules-release.cmake /home/ismail/.local/share/OpenCV/OpenCVModules.cmake /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.10/Modules/FindPackageMessage.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /usr/local/share/OpenCV/OpenCVConfig-version.cmake /usr/local/share/OpenCV/OpenCVConfig.cmake /usr/local/share/OpenCV/OpenCVModules-release.cmake /usr/local/share/OpenCV/OpenCVModules.cmake /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.10/Modules/FindPackageMessage.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake
   pool = console
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt /home/ismail/.local/share/OpenCV/OpenCVConfig-version.cmake /home/ismail/.local/share/OpenCV/OpenCVConfig.cmake /home/ismail/.local/share/OpenCV/OpenCVModules-release.cmake /home/ismail/.local/share/OpenCV/OpenCVModules.cmake /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.10/Modules/FindPackageMessage.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake: phony
+build ../CMakeLists.txt /usr/local/share/OpenCV/OpenCVConfig-version.cmake /usr/local/share/OpenCV/OpenCVConfig.cmake /usr/local/share/OpenCV/OpenCVModules-release.cmake /usr/local/share/OpenCV/OpenCVModules.cmake /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.10/Modules/FindPackageMessage.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake: phony
 
 #############################################
 # Clean all the built files.

@@ -42,7 +42,7 @@ rule CXX_EXECUTABLE_LINKER__TrafficSignDetection
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/bin/cmake -H/home/ismail/git_repos/TrafficSignDetection -B/home/ismail/git_repos/TrafficSignDetection/build
+  command = /usr/bin/cmake -H/home/ismail/TrafficSignDetection -B/home/ismail/TrafficSignDetection/build
   description = Re-running CMake...
   generator = 1
 

@@ -26,7 +26,9 @@ public:
 private:
     string identify_shape(const Mat &curve);
     double angle(Point pt1, Point pt2, Point pt0);
-    void preprocess(Mat &image, Mat &thresh);
+    void preprocess(const Mat &image, Mat &thresh);
+    void identify_contours(Mat &channel, map<string, Rect> &shapes, bool show);
+    void draw_contours(Mat &image, map<string, Rect> &shapes);
 
 };
 

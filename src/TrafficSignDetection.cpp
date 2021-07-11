@@ -91,7 +91,6 @@ int main( int argc, const char** argv )
     {   
         Mat frame;
         frame = imread( entry, IMREAD_ANYCOLOR );
-        //resize(frame, frame, Size(640,480));
         
         if ( !frame.data )
             continue;
@@ -109,7 +108,7 @@ int main( int argc, const char** argv )
             // does not work well.
             detectAndDisplay( frame, idx++, show);
         }
-        
+
         if(show)
         {
             if( waitKey(500) == 27 ) break; // quit (esc)
@@ -136,7 +135,7 @@ void classifyAndDisplay( Mat &frame, map<string, Rect> &proposals, int idx, bool
         String most_certain_sign; 
 
         Mat crop = frame_gray(itr_1->second);
-        resize(crop, crop, Size(100, 100));
+        resize(crop, crop, Size(64, 64));
         // loop trough the classifiers for each sign, given this specific proposal.
         map<string, CascadeClassifier>::iterator itr_2;
         for (itr_2 = haar_cascades.begin(); itr_2 != haar_cascades.end(); ++itr_2) 
@@ -159,7 +158,7 @@ void classifyAndDisplay( Mat &frame, map<string, Rect> &proposals, int idx, bool
         }
         if(max_certainity > 0)
         {
-            Rect original_rect =  itr_1->second - Size(50,50) + Point(25, 25);
+            Rect original_rect =  itr_1->second - Size(30,30) + Point(15, 15);
             // draw the bounding box and the sign label on the image.
             rectangle( frame, original_rect, Scalar( 255, 0, 255 ), 4);
             putText(
@@ -171,12 +170,15 @@ void classifyAndDisplay( Mat &frame, map<string, Rect> &proposals, int idx, bool
         }
     }
     
-    if(show) imshow("Traffic Sign Detection - Test", frame);
-    
     string filename = "../data/detection_results/det_" + to_string(idx) + ".jpg";
     imwrite(filename, frame);
     cout << "detection results are written to: " << filename << endl;
-    
+
+    if(show) 
+    {
+        resize(frame, frame, Size(640,480));
+        imshow("Traffic Sign Detection - Test", frame);
+    }
 }
 
 /** @function detectAndDisplay */

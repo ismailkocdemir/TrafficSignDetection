@@ -1,3 +1,3 @@
-/home/ismail/git_repos/TrafficSignDetection/build/CMakeFiles/rebuild_cache.dir
-/home/ismail/git_repos/TrafficSignDetection/build/CMakeFiles/TrafficSignDetection.dir
-/home/ismail/git_repos/TrafficSignDetection/build/CMakeFiles/edit_cache.dir
+/home/ismail/TrafficSignDetection/build/CMakeFiles/rebuild_cache.dir
+/home/ismail/TrafficSignDetection/build/CMakeFiles/TrafficSignDetection.dir
+/home/ismail/TrafficSignDetection/build/CMakeFiles/edit_cache.dir

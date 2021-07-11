@@ -3,6 +3,7 @@
 ShapeDetector::ShapeDetector(){}
 ShapeDetector::~ShapeDetector(){}
 
+
 double ShapeDetector::angle(Point pt1, Point pt2, Point pt0)
 {
 	double dx1 = pt1.x - pt0.x;
@@ -12,29 +13,54 @@ double ShapeDetector::angle(Point pt1, Point pt2, Point pt0)
 	return (dx1*dx2 + dy1*dy2)/sqrt((dx1*dx1 + dy1*dy1)*(dx2*dx2 + dy2*dy2) + 1e-10);
 }
 
-void ShapeDetector::preprocess(Mat &image, Mat &thresh)
+
+void ShapeDetector::preprocess(const Mat &image, Mat &thresh)
 {
     // Equalize histogram. this seems to help. 
     equalizeHist( image, thresh);
 
     // Apply thresholding/edge detection before finding conours.
-    GaussianBlur(thresh, thresh, Size(3, 3), 0.0);
+    GaussianBlur(thresh, thresh, Size(5, 5), 0.0);
     threshold(thresh, thresh, 150, 255, THRESH_BINARY);
 
     // Improve the structure by first eroding then dilating
-    Mat element_open = getStructuringElement( MORPH_RECT, Size(3, 3));
+    Mat element_open = getStructuringElement( MORPH_RECT, Size(17, 17));
     morphologyEx( thresh, thresh, MORPH_OPEN, element_open);
     
-    Mat element_close = getStructuringElement( MORPH_RECT, Size(3, 3));
+    Mat element_close = getStructuringElement( MORPH_RECT, Size(9, 9));
     morphologyEx( thresh, thresh, MORPH_CLOSE, element_close);
 }
+
 
 string ShapeDetector::identify_shape(const Mat &curve)
 {
     string shape = "unwanted";
-    vector<Point> approx;
-    approxPolyDP(curve, approx, arcLength(curve, true)*0.04, true);
 
+    // Draw a bounding box around.
+    Rect bbox = boundingRect(curve);
+    
+    // skip too wide and too long contours. 
+    double ar = 1.0 * bbox.width / bbox.height;
+    if (ar >= 4. || ar <= 0.25)
+        return shape;
+    
+    float b_area = bbox.width * bbox.height; 
+    float c_area = fabs(contourArea(curve));
+    
+    // Skip too small or too large contours
+    if ( b_area < 100 or b_area > 100000 )
+        return shape;
+
+    Mat hull;
+    convexHull(curve, hull);
+    float hull_area = contourArea(hull);
+    float solidity = hull_area/c_area;
+    // Skip contours that does not fill the box very well  
+    if ( solidity < 0.75 )
+        return shape;
+
+    vector<Point> approx;
+    approxPolyDP(curve, approx, arcLength(curve, true)*0.02, true);
     if (approx.size() == 3)
     {
         shape = "triangle"; 
@@ -64,9 +90,8 @@ string ShapeDetector::identify_shape(const Mat &curve)
             shape = "hexagon";
     }
     else
-    {
-        // Detect and label circles
-        
+    {   
+        shape = "non-convex";
         double area = contourArea(curve);
         Rect r = boundingRect(curve);
         int radius = r.width / 2;
@@ -78,36 +103,36 @@ string ShapeDetector::identify_shape(const Mat &curve)
     return shape;
 }
 
-map<string, Rect> ShapeDetector::detect_shapes(const Mat &image, bool show)
+
+void ShapeDetector::draw_contours(Mat &image, map<string, Rect> &shapes)
 {
+    for(auto shape: shapes)
+    {
+        rectangle( image, shape.second, Scalar( 255, 0, 255 ), 4);
+        putText(
+            image, // original image
+            shape.first, // sign category
+            Point(shape.second.x, shape.second.y-3), // text location
+            FONT_HERSHEY_SIMPLEX,  // font
+            0.5, Scalar(255,0,255), 2 // size and color
+        );
+    }
+}
 
-    map<string, Rect> shapes;
+
+void ShapeDetector::identify_contours(Mat &channel, map<string, Rect> &shapes, bool show)
+{
+    Mat dummy;
+    // get edges, improve morphology etc.
+    preprocess(channel, dummy);
     
-    Mat dummy, s_channel, hsv[3], thresh;
-    //cvtColor(image, gray, CV_BGR2GRAY);
-    cvtColor(image, dummy, CV_BGR2HSV);
-    split(dummy, hsv);
-    s_channel = hsv[1];
-
-    // Limited but robust option: Merge red-color and blue-color masks in HSV space.
-    //GaussianBlur(gray, thresh, Size(5, 5), 0);
-    //threshold(thresh, thresh, 60, 255, THRESH_BINARY);
-    /*
-    Mat r_channel1, r_channel2, b_channel;
-    inRange(dummy, Scalar(0, 70, 50), Scalar(10, 255, 255), r_channel1);
-    inRange(dummy, Scalar(170, 70, 50), Scalar(180, 255, 255), r_channel2);
-    inRange(dummy, Scalar(100,150,0), Scalar(140,255,255), b_channel);
-    Mat thresh = r_channel1 | r_channel2 | b_channel; // | gray;
-    */
-    
-    preprocess(s_channel, thresh);
-
     // Find contours and apply some heuristics to reduce the number of proposals.
     vector< vector<Point> > contours;
     vector<Vec4i> hierarchy;
-    findContours(thresh, contours, hierarchy,  RETR_EXTERNAL, CHAIN_APPROX_SIMPLE );
-	for (int i = 0; i < contours.size(); i++)
+    findContours(dummy, contours, hierarchy,  RETR_EXTERNAL, CHAIN_APPROX_SIMPLE );
+    for (int i = 0; i < contours.size(); i++)
 	{
+
         /* Identify the contour shape: triangle, square etc.
         * I did not have time to use this information, but it could help reduce the complexity.
         * e.g.: when we know the sign is a square, only run classifiers that recognize square signs.
@@ -119,53 +144,57 @@ map<string, Rect> ShapeDetector::detect_shapes(const Mat &image, bool show)
 
         // Draw a bounding box around.
         Rect bbox = boundingRect(contours[i]);
-        
-        // skip too wide and too long contours. 
-        double ar = 1.0 * bbox.width / bbox.height;
-        if (ar >= 4. || ar <= 0.25)
-            continue;
-        
-        float b_area = bbox.width * bbox.height; 
-        float c_area = fabs(contourArea(contours[i]));
-		
-        // Skip too small or too large contours
-        if ( b_area < 50 or b_area > 100000 )
-			continue;
-
-        /*
-        //Mat hull;
-        //convexHull(contours[i], hull);
-        //float hull_area = contourArea(hull);
-        float solidity = float(b_area)/c_area;
-        // Skip contours that does not fill the box very well  
-        if ( solidity < 0.5 )
-			continue;
-        */
-
         // Expand a little bit in case box falls short.
-        bbox = bbox + Size(50,50) + Point(-25, -25);
-        bbox = bbox & cv::Rect(0, 0, image.cols, image.rows);
-        
-        if(show)
+        bbox = bbox + Size(30,30) + Point(-15, -15);
+        bbox = bbox & Rect(0, 0, dummy.cols, dummy.rows);
+
+        if (show)
         {
-            rectangle( thresh, bbox, Scalar( 255, 0, 255 ), 4);
+            rectangle(dummy, bbox, Scalar( 255, 0, 255 ), 4);
             putText(
-                thresh, // original image
+                dummy, // original image
                 shape_id, // sign category
                 Point(bbox.x, bbox.y-3), // text location
                 FONT_HERSHEY_SIMPLEX,  // font
                 0.5, Scalar(255,0,255), 2 // size and color
             );
         }
+
         shapes.insert(pair<string, Rect> (shape_id, bbox)); 
     }
-    
-    if (show)
+
+    if(show)
     {
-        imshow("Traffic Sign Proposals", thresh);
-        waitKey(100);
+        resize(dummy, dummy, Size(640,480));
+        imshow("Traffic Sign Proposals", dummy);
     }
+}
+
+
+map<string, Rect> ShapeDetector::detect_shapes(const Mat &image, bool show)
+{
+
+    map<string, Rect> shapes;
     
+    Mat dummy, s_channel, hsv[3], thresh;
+    //cvtColor(image, gray, CV_BGR2GRAY);
+    cvtColor(image, dummy, CV_BGR2HSV);
+    split(dummy, hsv);
     
+
+    // detect from saturation channel directly
+    s_channel = hsv[1];
+    identify_contours(s_channel, shapes, show);
+
+    // Limited but robust option: Merge red-color and blue-color masks in HSV space.
+    /*
+    Mat r_channel1, r_channel2, b_channel;
+    inRange(dummy, Scalar(0, 70, 50), Scalar(10, 255, 255), r_channel1);
+    inRange(dummy, Scalar(170, 70, 50), Scalar(180, 255, 255), r_channel2);
+    inRange(dummy, Scalar(100,150,0), Scalar(140,255,255), b_channel);
+    Mat color_map = r_channel1 | r_channel2 | b_channel; // | gray;
+    identify_contours(color_map, shapes, show);
+    */
+
     return shapes;
 }
