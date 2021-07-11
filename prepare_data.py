@@ -6,8 +6,8 @@ import cv2
 import numpy as np
 
 # Some extracted stats [Given as (SIGN_TYPE, FREQUENCY) pairs]
-SIGNS_VISIBLE_ONLY = dict([('PRIORITY_ROAD', 330), ('PASS_RIGHT_SIDE', 178), ('70_SIGN', 158), ('PEDESTRIAN_CROSSING', 146), ('GIVE_WAY', 116), ('50_SIGN', 104), ('80_SIGN', 62), ('NO_STOPPING_NO_STANDING', 61), ('100_SIGN', 54), ('90_SIGN', 39), ('110_SIGN', 34), ('60_SIGN', 28), ('30_SIGN', 26), ('PASS_EITHER_SIDE', 24), ('120_SIGN', 24), ('NO_PARKING', 23), ('PASS_LEFT_SIDE', 15), ('STOP', 1)])
-SIGNS_ALL =  dict([('PRIORITY_ROAD', 470), ('PASS_RIGHT_SIDE', 351), ('PEDESTRIAN_CROSSING', 337), ('GIVE_WAY', 261), ('70_SIGN', 255), ('50_SIGN', 223), ('80_SIGN', 106), ('110_SIGN', 98), ('120_SIGN', 92), ('NO_STOPPING_NO_STANDING', 77), ('100_SIGN', 77), ('90_SIGN', 64), ('60_SIGN', 48), ('30_SIGN', 45), ('NO_PARKING', 39), ('PASS_EITHER_SIDE', 31), ('STOP', 21), ('PASS_LEFT_SIDE', 19), ('URDBL', 12)])
+# SIGNS_VISIBLE_ONLY = dict([('PRIORITY_ROAD', 330), ('PASS_RIGHT_SIDE', 178), ('70_SIGN', 158), ('PEDESTRIAN_CROSSING', 146), ('GIVE_WAY', 116), ('50_SIGN', 104), ('80_SIGN', 62), ('NO_STOPPING_NO_STANDING', 61), ('100_SIGN', 54), ('90_SIGN', 39), ('110_SIGN', 34), ('60_SIGN', 28), ('30_SIGN', 26), ('PASS_EITHER_SIDE', 24), ('120_SIGN', 24), ('NO_PARKING', 23), ('PASS_LEFT_SIDE', 15), ('STOP', 1)])
+# SIGNS_ALL =  dict([('PRIORITY_ROAD', 470), ('PASS_RIGHT_SIDE', 351), ('PEDESTRIAN_CROSSING', 337), ('GIVE_WAY', 261), ('70_SIGN', 255), ('50_SIGN', 223), ('80_SIGN', 106), ('110_SIGN', 98), ('120_SIGN', 92), ('NO_STOPPING_NO_STANDING', 77), ('100_SIGN', 77), ('90_SIGN', 64), ('60_SIGN', 48), ('30_SIGN', 45), ('NO_PARKING', 39), ('PASS_EITHER_SIDE', 31), ('STOP', 21), ('PASS_LEFT_SIDE', 19), ('URDBL', 12)])
 
 
 def get_average_brightness_from_bbox(image_file, bbox, remove_outliers=True):
@@ -133,11 +133,8 @@ def parse_annotations(file_path, visible_only=False):
                 images_without_sign.append(image_name)
             
     most_common_signs = Counter(sign_list).most_common()
-    #sign_cat_counter = Counter(sign_cat_list)
     print('Images with sign:', len(images_with_sign))
     print('Images without sign:', len(images_without_sign))
-    #print('Images with Misc. sign:', len(images_with_misc_sign))
-    #print('Sign categories:', len(sign_cat_counter))
     print('Signs and freqs:', most_common_signs)
     
     return (
@@ -316,7 +313,7 @@ def prepare_training_data(
     vec_filename += ".vec"
     if sign_filter and (use_augmented_data or use_templates):
         if largest_image or use_templates:
-            os.system('opencv_createsamples -img {} -vec {} -num {} -w 24 -h 24'.format(
+            os.system('opencv_createsamples -img {} -vec {} -num {} -w 64 -h 64'.format(
                         sign_save_path if largest_image else "templates/{}.png".format(sign_filter), 
                         vec_filename,
                         3000
@@ -324,7 +321,7 @@ def prepare_training_data(
             )
 
     elif object_count > 10:
-        os.system('opencv_createsamples -info {} -vec {} -num {} -w 24 -h 24'.format(
+        os.system('opencv_createsamples -info {} -vec {} -num {} -w 32 -h 32'.format(
                     positive_filename, 
                     vec_filename,
                     object_count
@@ -339,15 +336,16 @@ def prepare_training_data(
 
 
 if __name__ == '__main__':
-    parse_annotations('data/dataset/annotations_test.txt', visible_only=True) # just for extracting some info.
+    _,_, COMMON_SIGNS = parse_annotations('data/dataset/annotations_test.txt', visible_only=True) # just for extracting some info.
+    COMMON_SIGNS = dict(COMMON_SIGNS)
 
-    options = [(0,1)]
+    options = [(0,0)]
     script_path = os.path.dirname(os.path.realpath(__file__))
     os.chdir(os.path.join(script_path, 'data/dataset'))
     idx = 0   
-    for sgn,freq in SIGNS_VISIBLE_ONLY.items():
-        #if sgn not in ['100_SIGN', '70_SIGN', '50_SIGN', 'PEDESTRIAN_CROSSING', 'GIVE_WAY', 'PASS_RIGHT_SIDE']:
-        #    continue
+    for sgn,freq in COMMON_SIGNS.items():
+        if freq < 50:
+            continue
         for a,t in options:
             prepare_training_data(
                 '/home/ismail/git_repos/TrafficSignDetection/data/dataset/img', 

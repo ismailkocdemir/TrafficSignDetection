@@ -36,7 +36,7 @@ def train_cascades_all_signs():
 
         os.system(
             "opencv_traincascade -data {} -vec {} -bg {} -numPos {} \
-            -numNeg 2430 -mode ALL \
+            -numNeg 2430 -mode ALL -w 32 -h 32 \
             -acceptanceRatioBreakValue 10e-5 \
             -numStages 20  -maxFalseAlarmRate 0.5".format(
                                                         overall_dir,

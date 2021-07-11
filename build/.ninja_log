@@ -62,3 +62,16 @@
 721	862	1625688059	TrafficSignDetection	ce137c82f1e8c7aa
 0	668	1625689913	CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o	2a8eb37196c9ff0d
 668	803	1625689913	TrafficSignDetection	ce137c82f1e8c7aa
+0	751	1625737418	CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o	89a34683ad1ff84e
+0	757	1625737418	CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o	2a8eb37196c9ff0d
+757	947	1625737418	TrafficSignDetection	ce137c82f1e8c7aa
+1	752	1625866884248551690	CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o	89a34683ad1ff84e
+1	762	1625866884256551692	CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o	2a8eb37196c9ff0d
+762	945	1625866884436551741	TrafficSignDetection	ce137c82f1e8c7aa
+0	647	1625868067172324190	CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o	2a8eb37196c9ff0d
+647	781	1625868067304323873	TrafficSignDetection	ce137c82f1e8c7aa
+0	638	1625868123352193670	CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o	2a8eb37196c9ff0d
+638	764	1625868123476193391	TrafficSignDetection	ce137c82f1e8c7aa
+1	755	1625993601	CMakeFiles/TrafficSignDetection.dir/src/TrafficSignDetection.cpp.o	89a34683ad1ff84e
+0	655	1625993616	CMakeFiles/TrafficSignDetection.dir/src/ShapeDetector.cpp.o	2a8eb37196c9ff0d
+655	841	1625993616	TrafficSignDetection	ce137c82f1e8c7aa

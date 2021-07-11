@@ -83,19 +83,24 @@ map<string, Rect> ShapeDetector::detect_shapes(const Mat &image, bool show)
 
     map<string, Rect> shapes;
     
-    Mat dummy, s_channel, gray;
+    Mat dummy, s_channel, hsv[3], thresh;
     //cvtColor(image, gray, CV_BGR2GRAY);
     cvtColor(image, dummy, CV_BGR2HSV);
-    //split(dummy, hsv);
+    split(dummy, hsv);
+    s_channel = hsv[1];
 
     // Limited but robust option: Merge red-color and blue-color masks in HSV space.
+    //GaussianBlur(gray, thresh, Size(5, 5), 0);
+    //threshold(thresh, thresh, 60, 255, THRESH_BINARY);
+    /*
     Mat r_channel1, r_channel2, b_channel;
     inRange(dummy, Scalar(0, 70, 50), Scalar(10, 255, 255), r_channel1);
     inRange(dummy, Scalar(170, 70, 50), Scalar(180, 255, 255), r_channel2);
     inRange(dummy, Scalar(100,150,0), Scalar(140,255,255), b_channel);
     Mat thresh = r_channel1 | r_channel2 | b_channel; // | gray;
+    */
     
-    preprocess(thresh, thresh);
+    preprocess(s_channel, thresh);
 
     // Find contours and apply some heuristics to reduce the number of proposals.
     vector< vector<Point> > contours;
@@ -117,14 +122,14 @@ map<string, Rect> ShapeDetector::detect_shapes(const Mat &image, bool show)
         
         // skip too wide and too long contours. 
         double ar = 1.0 * bbox.width / bbox.height;
-        if (ar >= 3. || ar <= 0.33)
+        if (ar >= 4. || ar <= 0.25)
             continue;
         
         float b_area = bbox.width * bbox.height; 
         float c_area = fabs(contourArea(contours[i]));
 		
         // Skip too small or too large contours
-        if ( b_area < 100 or b_area > 90000 )
+        if ( b_area < 50 or b_area > 100000 )
 			continue;
 
         /*

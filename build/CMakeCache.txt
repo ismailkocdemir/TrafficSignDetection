@@ -110,7 +110,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=ObjectDetection
+CMAKE_PROJECT_NAME:STATIC=TrafficSignDetection
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -169,6 +169,12 @@ ObjectDetection_SOURCE_DIR:STATIC=/home/ismail/git_repos/TrafficSignDetection
 
 //The directory containing a CMake configuration file for OpenCV.
 OpenCV_DIR:PATH=/home/ismail/.local/share/OpenCV
+
+//Value Computed by CMake
+TrafficSignDetection_BINARY_DIR:STATIC=/home/ismail/git_repos/TrafficSignDetection/build
+
+//Value Computed by CMake
+TrafficSignDetection_SOURCE_DIR:STATIC=/home/ismail/git_repos/TrafficSignDetection
 
 
 ########################
