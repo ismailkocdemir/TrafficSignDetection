@@ -21,7 +21,7 @@ void ShapeDetector::preprocess(const Mat &image, Mat &thresh)
 
     // Apply thresholding/edge detection before finding conours.
     GaussianBlur(thresh, thresh, Size(5, 5), 0.0);
-    threshold(thresh, thresh, 150, 255, THRESH_BINARY);
+    threshold(thresh, thresh, 170, 255, THRESH_BINARY);
 
     // Improve the structure by first eroding then dilating
     Mat element_open = getStructuringElement( MORPH_RECT, Size(17, 17));
@@ -180,8 +180,7 @@ map<string, Rect> ShapeDetector::detect_shapes(const Mat &image, bool show)
     //cvtColor(image, gray, CV_BGR2GRAY);
     cvtColor(image, dummy, CV_BGR2HSV);
     split(dummy, hsv);
-    
-
+  
     // detect from saturation channel directly
     s_channel = hsv[1];
     identify_contours(s_channel, shapes, show);

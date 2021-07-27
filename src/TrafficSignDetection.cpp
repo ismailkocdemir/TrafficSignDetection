@@ -135,7 +135,11 @@ void classifyAndDisplay( Mat &frame, map<string, Rect> &proposals, int idx, bool
         String most_certain_sign; 
 
         Mat crop = frame_gray(itr_1->second);
-        resize(crop, crop, Size(64, 64));
+        
+        float ratio = (crop.cols > crop.rows)?(64.0 / crop.rows):(64.0 / crop.cols);
+        Size new_size = Size(int(crop.cols*ratio), int(crop.rows*ratio));
+        resize(crop, crop, new_size);
+
         // loop trough the classifiers for each sign, given this specific proposal.
         map<string, CascadeClassifier>::iterator itr_2;
         for (itr_2 = haar_cascades.begin(); itr_2 != haar_cascades.end(); ++itr_2) 
